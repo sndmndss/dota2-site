@@ -1,6 +1,15 @@
 from steam.client import SteamClient
 from dota2.client import Dota2Client
-from d2site.settings import STEAM_LOGIN, STEAM_PASSWORD
+from decouple import config
+
+
+STEAM_LOGIN = config("STEAM_LOGIN")
+STEAM_PASSWORD = config("STEAM_PASSWORD")
+
+
+class LoginError(Exception):
+    """Exception raised when trying to log in is failed"""
+    pass
 
 
 class Coordinator:
@@ -16,5 +25,8 @@ class Coordinator:
             cls.client.login(username=STEAM_LOGIN, password=STEAM_PASSWORD)
             cls.dota = Dota2Client(cls.client)
             cls.dota.launch()
-        cls._is_connected = True
+            if not cls.dota.steam.logged_on:
+                raise LoginError("We have unexpected temporary problem with Steam")
+            else:
+                cls._is_connected = True
         return cls.dota

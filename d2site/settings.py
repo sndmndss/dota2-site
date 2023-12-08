@@ -39,7 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'd2site.apps.home',
+    'd2site.apps.matches',
+    'd2site.apps.player',
+
+
+    'rest_framework',
+    'corsheaders',
 ]
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,8 +88,12 @@ WSGI_APPLICATION = 'd2site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dota2stats',
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -128,7 +142,5 @@ STATIC_URL = 'd2site/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configuration for script
 
-STEAM_LOGIN = config("STEAM_LOGIN")
-STEAM_PASSWORD = config("STEAM_PASSWORD")
+

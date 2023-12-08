@@ -1,18 +1,28 @@
 {% extends 'base/../base/base.html' %}
 {% load static %}
-{% block logo %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <a href="/home/" class="custom-link">Перейти на главную</a>
-{% endblock %}
+
 {% block title %} Player {% endblock %}
 {% block stats %}
     <h1>Player Statistics</h1>
+    important info
     <h2>Players name: {{ name }}</h2>
     <p>Account ID: {{ player_stats.account_id }}</p>
     <p>Match Count: {{ player_stats.match_count }}</p>
+    5sq info
+    <p>Fight Score: {{ player_stats.fight_score }}</p>
+    <p>Farm Score: {{ player_stats.farm_score }}</p>
+    <p>Support Score: {{ player_stats.support_score }}</p>
+    <p>Push Score: {{ player_stats.push_score }}</p>
+    <p>Versatility Score: {{ player_stats.versatility_score }}</p>
+    mean info
     <p>Mean GPM: {{ player_stats.mean_gpm }}</p>
     <p>Mean XPPM: {{ player_stats.mean_xppm }}</p>
     <p>Mean Last Hits: {{ player_stats.mean_lasthits }}</p>
+    <p>Mean Networth: {{ player_stats.mean_networth }}</p>
+    <p>Mean Damage: {{ player_stats.mean_damage }}</p>
+    <p>Mean Heals: {{ player_stats.mean_heals }}</p>
+    additional infomation
+    <p>Rapiers Purchased: {{ player_stats.rapiers_purchased }}</p>
     <p>Rampages: {{ player_stats.rampages }}</p>
     <p>Triple Kills: {{ player_stats.triple_kills }}</p>
     <p>First Blood Claimed: {{ player_stats.first_blood_claimed }}</p>
@@ -21,13 +31,6 @@
     <p>Aegises Snatched: {{ player_stats.aegises_snatched }}</p>
     <p>Cheeses Eaten: {{ player_stats.cheeses_eaten }}</p>
     <p>Creeps Stacked: {{ player_stats.creeps_stacked }}</p>
-    <p>Fight Score: {{ player_stats.fight_score }}</p>
-    <p>Farm Score: {{ player_stats.farm_score }}</p>
-    <p>Support Score: {{ player_stats.support_score }}</p>
-    <p>Push Score: {{ player_stats.push_score }}</p>
-    <p>Versatility Score: {{ player_stats.versatility_score }}</p>
-    <p>Mean Networth: {{ player_stats.mean_networth }}</p>
-    <p>Mean Damage: {{ player_stats.mean_damage }}</p>
-    <p>Mean Heals: {{ player_stats.mean_heals }}</p>
-    <p>Rapiers Purchased: {{ player_stats.rapiers_purchased }}</p>
-{% endblock %}
+    <p>{{ match_history }}</p>
+    
+    {% endblock %}

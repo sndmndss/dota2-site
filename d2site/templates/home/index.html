@@ -1,13 +1,12 @@
 {% extends 'base/../base/base.html' %}
 {% load static %}
 {% block title %} Home {% endblock %}
-{% block logo %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <a href="/home/" class="custom-link">Перейти на главную</a>
-{% endblock %}
+
 {% block searchForm %}
-<form id="searchForm">
+<form class="text-center" id="searchForm">
+    <div class=""></div>
         <input type="number" id="accountId" name="account_id" required>
         <input type="submit" value="Search">
-    </form>
+</form>
 {% endblock %}
+{% block scripts %} <script src="{% static 'js/redirect.js' %}"></script>{% endblock %}
