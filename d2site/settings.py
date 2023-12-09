@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+
+    'social_django',
 ]
 
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
@@ -142,5 +144,13 @@ STATIC_URL = 'd2site/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Steam authentication
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.steam.SteamOpenId',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
-
+SOCIAL_AUTH_STEAM_API_KEY = config('STEAM_API_KEY')
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/'
