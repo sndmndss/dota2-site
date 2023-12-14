@@ -15,7 +15,10 @@ class SteamWebApi:
                                                      "account_id": str(account_id),
                                                      "start_at_match_id": last_match_id,
                                                      "matches_requested": cls.MATCHES_REQUESTED})
-        match_history = match_history_request.json()["result"]["matches"]
+        if match_history_request.json()["result"]["status"] != 15:
+            match_history = match_history_request.json()["result"]["matches"]
+        else:
+            return 0
         return match_history
 
     @classmethod

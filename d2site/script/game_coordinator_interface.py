@@ -12,7 +12,7 @@ async def get_player_data(account_id: int) -> (dict, str):
     :return: data`
     :rtype: :class:`tuple`: (:class:`dict`, :class:`str`)
     """
-    dota = await Coordinator.connect()
+    dota = await Coordinator.connection()
     dota.request_player_stats(account_id)
     _, data = dota.wait_event("player_stats", timeout=5, raises=True)
     player_name = await request_players_name(dota, account_id)

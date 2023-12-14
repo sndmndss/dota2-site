@@ -1,13 +1,13 @@
 {% extends 'base/../base/base.html' %}
 {% load static %}
 {% block title %} Home {% endblock %}
-
-{% block searchForm %}
+{% block user_context %}
+{% if user.is_authenticated %}
+    {% if player_nickname %}
+        <!-- Если пользователь залогинен через Steam, показываем его ник -->
+        <a href="/player/{{ steamid3 }}"> {{ player_nickname }} </a>
+    {% endif %}
+{% else %}
     <a href="{% url 'social:begin' 'steam' %}">Войти через Steam</a>
-<form class="text-center" id="searchForm">
-    <div class=""></div>
-        <input type="number" id="accountId" name="account_id" required>
-        <input type="submit" value="Search">
-</form>
+{% endif %}
 {% endblock %}
-{% block scripts %} <script src="{% static 'js/redirect.js' %}"></script>{% endblock %}

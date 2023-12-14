@@ -18,7 +18,7 @@ class Coordinator:
     dota = None
 
     @classmethod
-    async def connect(cls):
+    async def connection(cls):
         if cls._is_connected:
             return cls.dota
         if not cls.client.logged_on:
@@ -30,3 +30,8 @@ class Coordinator:
             else:
                 cls._is_connected = True
         return cls.dota
+
+    @classmethod
+    async def disconnect(cls):
+        cls.client.disconnect()
+        cls.dota.exit()

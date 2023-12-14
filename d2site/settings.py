@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'd2site.apps.home',
-    'd2site.apps.matches',
-    'd2site.apps.player',
+    'd2site.apps.home.apps.HomeConfig',
+    'd2site.apps.matches.apps.MatchesConfig',
+    'd2site.apps.player.apps.PlayerConfig',
 
 
     'rest_framework',
@@ -151,6 +151,16 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_STEAM_API_KEY = config('STEAM_API_KEY')
+SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player', 'communityvisibilitystate',
+                                'profilestate', 'lastlogoff',
+                                'commentpermission', 'realname',
+                                'primaryclanid', 'timecreated', 'gameid',
+                                'gameserverip', 'loccountrycode', 'locstatecode',
+                                'loccityid']
+
+
+
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/'
+

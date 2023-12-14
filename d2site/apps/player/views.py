@@ -21,7 +21,5 @@ class PlayerView(View):
         else:
             return await self.handle_top_player_request(request)
 
-
-
     async def handle_top_player_request(self, request):
         return render(request, 'top_players/index.html')
