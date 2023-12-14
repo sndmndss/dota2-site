@@ -39,7 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'd2site.apps.home.apps.HomeConfig',
+    'd2site.apps.matches.apps.MatchesConfig',
+    'd2site.apps.player.apps.PlayerConfig',
+
+
+    'rest_framework',
+    'corsheaders',
+
+    'social_django',
 ]
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,8 +90,12 @@ WSGI_APPLICATION = 'd2site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dota2stats',
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -128,7 +144,23 @@ STATIC_URL = 'd2site/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Configuration for script
+# Steam authentication
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.steam.SteamOpenId',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
-STEAM_LOGIN = config("STEAM_LOGIN")
-STEAM_PASSWORD = config("STEAM_PASSWORD")
+SOCIAL_AUTH_STEAM_API_KEY = config('STEAM_API_KEY')
+SOCIAL_AUTH_STEAM_EXTRA_DATA = ['player', 'communityvisibilitystate',
+                                'profilestate', 'lastlogoff',
+                                'commentpermission', 'realname',
+                                'primaryclanid', 'timecreated', 'gameid',
+                                'gameserverip', 'loccountrycode', 'locstatecode',
+                                'loccityid']
+
+
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = '/'
+

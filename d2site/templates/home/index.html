@@ -1,13 +1,13 @@
 {% extends 'base/../base/base.html' %}
 {% load static %}
 {% block title %} Home {% endblock %}
-{% block logo %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <a href="/home/" class="custom-link">Перейти на главную</a>
-{% endblock %}
-{% block searchForm %}
-<form id="searchForm">
-        <input type="number" id="accountId" name="account_id" required>
-        <input type="submit" value="Search">
-    </form>
+{% block user_context %}
+{% if user.is_authenticated %}
+    {% if player_nickname %}
+        <!-- Если пользователь залогинен через Steam, показываем его ник -->
+        <a href="/player/{{ steamid3 }}"> {{ player_nickname }} </a>
+    {% endif %}
+{% else %}
+    <a href="{% url 'social:begin' 'steam' %}">Войти через Steam</a>
+{% endif %}
 {% endblock %}
