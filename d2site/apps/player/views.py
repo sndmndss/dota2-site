@@ -11,7 +11,7 @@ class PlayerView(View):
         if account_id:
             try:
                 player_stats, player_name = await get_player_data(account_id)
-                match_history = await SteamWebApi.get_match_history(account_id)
+                match_history = await SteamWebApi.get_match_history(account_id)  # TODO: исключения для сценариев result.status
                 return render(request, 'player/index.html',
                               {'player_stats': player_stats,
                                'name': player_name,
