@@ -17,6 +17,9 @@ Dota 2 Player Statistics - это веб-приложение, разработ�
 - Dota 2 API
 - JavaScript
 - HTML/CSS
+- Docker-compose
+- Docker
+- React.js frontend(in process)
 
 ## Установка
 
@@ -26,7 +29,7 @@ Dota 2 Player Statistics - это веб-приложение, разработ�
 
 `git clone https://github.com/sndmndss/dota2-site.git`
 
-`cd dota2-player-statistics`
+`cd dota2-site`
 
 2. Установите виртуальное окружение и активируйте его:
 
@@ -46,13 +49,22 @@ Dota 2 Player Statistics - это веб-приложение, разработ�
 
 `STEAM_PASSWORD=your_steam_password`
 
+`STEAM_API_KEY=steamwebapi key(ссылка после всех пунктов)`
+
+`DB_USER=DataBase username`
+
+`DB_PASSWORD=DataBase password`
 5. Выполните миграции:
 
 `python manage.py migrate`
 
 6. Запустите сервер разработки:
 
-`uvicorn d2site.asgi:application --host 127.0.0.1 --port 8000 --reload`
+`uvicorn d2site.asgi:app --host 127.0.0.1 --port 8000 --reload`
+
+### Links
+
+https://steamcommunity.com/dev/
 
 ## Использование
 
