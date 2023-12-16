@@ -19,18 +19,16 @@ def calculate_steamid3(steamid64: int):
 @receiver(post_save, sender=UserSocialAuth)
 def create_or_update_steam_user_data(sender, instance, created, **kwargs):
     if instance.provider == 'steam':
-        player_data = instance.extra_data.get('player', {})
-        steamid64 = int(player_data.get('steamid'))
-        if steamid64:
-            steam_id3 = calculate_steamid3(steamid64)
-            SteamUser.objects.update_or_create(
-                user_social_auth=instance,
-                defaults={'steamID3': steam_id3}
-            )
-            logger.info(f'SteamUserData updated for user {instance.user} with steamID3: {steam_id3}')
+        if instance.extra_data.get('player', {}):
+            player_data = instance.extra_data.get('player', {})
+            steamid64 = int(player_data.get('steamid'))
+            if steamid64:
+                steam_id3 = calculate_steamid3(steamid64)
+                SteamUser.objects.update_or_create(
+                    user_social_auth=instance,
+                    defaults={'steamID3': steam_id3}
+                )
         else:
-            logger.error(f'Steamid64 not found in extra_data for user {instance.user}')
-    else:
-        logger.info(f'Provider is not steam for user {instance.user}')
+            logger.info(f'Waiting for extra_data to be populated for user {instance.user}')
 
 

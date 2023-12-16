@@ -6,7 +6,10 @@
     {% if player_nickname %}
         <!-- Если пользователь залогинен через Steam, показываем его ник -->
         <a href="/player/{{ steamid3 }}"> {{ player_nickname }} </a>
+    {% else %}
+        <a href="{% url 'social:begin' 'steam' %}">Войти через Steam</a>
     {% endif %}
+
 {% else %}
     <a href="{% url 'social:begin' 'steam' %}">Войти через Steam</a>
 {% endif %}
