@@ -19,6 +19,7 @@ class Coordinator:
 
     @classmethod
     async def connection(cls):
+        """Makes the connection with steam and dota 2 coordinator"""
         if cls._is_connected:
             return cls.dota
         if not cls.client.logged_on:

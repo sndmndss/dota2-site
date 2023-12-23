@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from d2site.script.steam_api_requests import SteamWebApi
+from d2site.scripts.steam_api_requests import SteamWebApi
 
 
 class MatchView(View):
