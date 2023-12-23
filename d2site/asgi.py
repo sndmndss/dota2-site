@@ -1,6 +1,6 @@
 import os
 from django.core.asgi import get_asgi_application
-from d2site.script.coordinator import Coordinator
+from d2site.scripts.coordinator import Coordinator
 
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'd2site.settings')

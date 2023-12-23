@@ -32,5 +32,36 @@
     <p>Cheeses Eaten: {{ player_stats.cheeses_eaten }}</p>
     <p>Creeps Stacked: {{ player_stats.creeps_stacked }}</p>
     <p>{{ match_history }}</p>
-    
-    {% endblock %}
+{% endblock %}
+{% block comments %}
+    {% if comment_form %}
+        {% if trusted %}
+            <div class="card-body">
+                <h3>Comments</h3>
+                <form method="post" style="margin-top: 1.3em;">
+                    {{ comment_form.as_p }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+                </form>
+            </div>
+        {% else %}
+            <p>You have no common matches with this player</p>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'social:begin' 'steam' %}">Для комментирования войти через Steam</a>
+    {% endif %}
+    {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+                <a href="{% url 'player:player' account_id=comment.author_uid %}">{{ comment.author_name }}</a>
+                <span class=" text-muted font-weight-normal">
+             {{ comment.created }}
+            </span>
+            </p>
+            {{ comment.text | linebreaks }}
+            <a href="{% url 'match' match_id=comment.match_id %}">{{ comment.match_id }}</a>
+            {{ comment.usefulness }}
+            {{ rating }}
+        </div>
+    {% endfor %}
+{% endblock %}
